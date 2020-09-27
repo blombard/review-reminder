@@ -5,7 +5,6 @@ const run = async () => {
   try {
     const token = core.getInput('token', { required: true });
     const octokit = github.getOctokit(token);
-    // const owner = github.context.payload.repository.full_name.split('/')[0];
     const owner = github.context.payload.sender.login;
     const repo = github.context.payload.repository.name;
 
@@ -16,14 +15,14 @@ const run = async () => {
     });
 
     console.log(data[0]);
-    // console.log(data[0].labels);
-
-    await octokit.issues.createComment({ 
-      owner,
-      repo,
-      issue_number: data[0].number,
-      body: "Hello, world! Thanks for creating the PR",
-    });
+    for (let i = 0; i < data.length; i++) {
+      await octokit.issues.createComment({ 
+        owner,
+        repo,
+        issue_number: data[i].number,
+        body: "Hello, world! Thanks for creating the PR",
+      });
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
