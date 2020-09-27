@@ -19,8 +19,8 @@ const run = async () => {
       state: 'open',
     });
 
-    console.log(data.assignees);
-    console.log(data.labels);
+    console.log(data[0].assignees);
+    console.log(data[0].labels);
     // console.log(octokit);
     // console.log(core);
   } catch (error) {
