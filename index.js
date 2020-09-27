@@ -14,11 +14,10 @@ const run = async () => {
       state: 'open',
     });
 
-    console.log(data[0]);
     for (let i = 0; i < data.length; i++) {
-      const { requested_reviewers, assignees } = data[i]
+      const { requested_reviewers, assignees } = data[i];
       // const requestedReviewersLogin = requested_reviewers.map(r => r.login)
-      const requestedReviewersLogin = assignees.map(r => `@${r.login}`).join(', ')
+      const requestedReviewersLogin = assignees.map(r => `@${r.login}`).join(', ');
       await octokit.issues.createComment({ 
         owner,
         repo,
