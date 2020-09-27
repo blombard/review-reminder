@@ -44,8 +44,7 @@ const rightTimeForReminder = (updatedAt, daysBeforeReminder) => {
   const today = new Date().getTime();
   const updatedAtDate = new Date(updatedAt).getTime();
   const daysInMilliSecond = 86400000 * daysBeforeReminder;
-  return updatedAtDate - daysInMilliSecond < today; // To trigger the comment
-  // return updatedAtDate - daysInMilliSecond > today;
+  return updatedAtDate - daysInMilliSecond > today;
 };
 
 if (require.main === require.cache[eval('__filename')]) {
