@@ -1,0 +1,16 @@
+name: 'Pull request reminders'
+description: 'Send reminders to authors, reviewers... of a pull request'
+author: 'Baptiste Lombard'
+inputs:
+  token:
+    description: 'The GITHUB_TOKEN secret'
+    required: true
+  stale:
+    description: 'Remind the author that the PR has not been updated for a while'
+    required: false
+  review:
+    description: 'Remind requested reviewers to review the PR'
+    required: false
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

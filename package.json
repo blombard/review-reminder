@@ -1,0 +1,29 @@
+{
+  "name": "pull-request-reminders",
+  "version": "0.1.0",
+  "description": "Send reminders to authors, reviewers... of a pull request",
+  "main": "dist/index.js",
+  "scripts": {
+    "coverage": "jest --coverage",
+    "test": "jest --coverage --verbose",
+    "build": "ncc build index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blombard/pull-request-reminders.git"
+  },
+  "author": "Baptiste Lombard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blombard/pull-request-reminders/issues"
+  },
+  "homepage": "https://github.com/blombard/pull-request-reminders#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.5",
+    "@actions/github": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.24.0",
+    "jest": "^26.4.2"
+  }
+}
