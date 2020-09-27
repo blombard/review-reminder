@@ -3,7 +3,7 @@ const github = require('@actions/github');
 
 const run = async () => {
   try {
-    const token = core.getInput('token');
+    // const token = core.getInput('token');
     // const octokit = github.getOctokit(token);
 
     // const data = await octokit.pulls.list({
@@ -12,7 +12,8 @@ const run = async () => {
     // });
 
     console.log(github.context);
-    // console.log(data);
+    console.log(github);
+    console.log(core);
   } catch (error) {
     core.setFailed(error.message);
   }
