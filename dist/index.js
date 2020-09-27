@@ -10,20 +10,41 @@ const github = __webpack_require__(438);
 
 const run = async () => {
   try {
-    const token = core.getInput('token');
-    const octokit = github.getOctokit(token);
+    const token = core.getInput('token', { required: true });
+    const reviewComment = core.getInput('reminder-comment');
+    const daysBeforeReminder = core.getInput('days-before-reminder');
 
-    const data = await octokit.pulls.list({
-      owner: github.context.payload.repository.full_name.split('/')[0],
-      repo: github.context.payload.repository.name,
+    const octokit = github.getOctokit(token);
+    const owner = github.context.payload.sender.login;
+    const repo = github.context.payload.repository.name;
+
+    const { data } = await octokit.pulls.list({
+      owner,
+      repo,
+      state: 'open',
     });
 
-    console.log(data);
-    // console.log(octokit);
-    // console.log(core);
+    data.forEach(({ requested_reviewers, updated_at, number }) => {
+      if (rightTimeForReminder(updated_at, daysBeforeReminder)) {
+        const requestedReviewersLogin = requested_reviewers.map(r => `@${r.login}`).join(', ');
+        octokit.issues.createComment({
+          owner,
+          repo,
+          issue_number: number,
+          body: `Hey ${requestedReviewersLogin} ! ${reviewComment}`,
+        });
+      }
+    });
   } catch (error) {
     core.setFailed(error.message);
   }
+};
+
+const rightTimeForReminder = (updatedAt, daysBeforeReminder) => {
+  const today = new Date().getTime();
+  const updatedAtDate = new Date(updatedAt).getTime();
+  const daysInMilliSecond = 86400000 * daysBeforeReminder;
+  return updatedAtDate - daysInMilliSecond > today;
 };
 
 if (require.main === require.cache[eval('__filename')]) {
