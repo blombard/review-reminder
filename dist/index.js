@@ -15,8 +15,8 @@ const run = async () => {
     const daysBeforeReminder = core.getInput('days-before-reminder');
 
     const octokit = github.getOctokit(token);
-    const owner = github.context.payload.sender.login;
-    const repo = github.context.payload.repository.name;
+    const owner = github.context.payload.sender && github.context.payload.sender.login;
+    const repo = github.context.payload.repositor && github.context.payload.repository.name;
 
     const { data } = await octokit.pulls.list({
       owner,
@@ -44,7 +44,7 @@ const rightTimeForReminder = (updatedAt, daysBeforeReminder) => {
   const today = new Date().getTime();
   const updatedAtDate = new Date(updatedAt).getTime();
   const daysInMilliSecond = 86400000 * daysBeforeReminder;
-  return updatedAtDate - daysInMilliSecond > today;
+  return today - daysInMilliSecond > updatedAtDate;
 };
 
 if (require.main === require.cache[eval('__filename')]) {
