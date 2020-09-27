@@ -10,12 +10,17 @@ const github = __webpack_require__(438);
 
 const run = async () => {
   try {
-    const token = core.getInput('token');
-    const octokit = github.getOctokit(token);
+    // const token = core.getInput('token');
+    // const octokit = github.getOctokit(token);
 
-    const data = await octokit.pulls.get();
+    // const data = await octokit.pulls.list({
+    //   owner,
+    //   repo,
+    // });
 
-    console.log(data);
+    console.log(github.context);
+    console.log(github);
+    console.log(core);
   } catch (error) {
     core.setFailed(error.message);
   }
