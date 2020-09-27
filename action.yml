@@ -1,4 +1,4 @@
-name: 'Pull request reminders'
+name: 'Review reminder'
 description: 'Send reminders to authors, reviewers... of a pull request'
 author: 'Baptiste Lombard'
 inputs:

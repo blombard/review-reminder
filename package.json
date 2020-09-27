@@ -1,7 +1,7 @@
 {
-  "name": "pull-request-reminders",
+  "name": "review-reminder",
   "version": "0.1.0",
-  "description": "Send reminders to authors, reviewers... of a pull request",
+  "description": "Send reminders to requested reviewers of a pull request",
   "main": "dist/index.js",
   "scripts": {
     "coverage": "jest --coverage",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blombard/pull-request-reminders.git"
+    "url": "git+https://github.com/blombard/review-reminder.git"
   },
   "author": "Baptiste Lombard",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/blombard/pull-request-reminders/issues"
+    "url": "https://github.com/blombard/review-reminder/issues"
   },
-  "homepage": "https://github.com/blombard/pull-request-reminders#readme",
+  "homepage": "https://github.com/blombard/review-reminder#readme",
   "dependencies": {
     "@actions/core": "^1.2.5",
     "@actions/github": "^4.0.0"
