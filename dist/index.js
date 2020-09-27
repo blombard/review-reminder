@@ -24,13 +24,13 @@ const run = async () => {
       state: 'open',
     });
 
-    data.forEach(({ requested_reviewers, updated_at }) => {
+    data.forEach(({ requested_reviewers, updated_at, number }) => {
       if (rightTimeForReminder(updated_at, daysBeforeReminder)) {
         const requestedReviewersLogin = requested_reviewers.map(r => `@${r.login}`).join(', ');
-        octokit.issues.createComment({ 
+        octokit.issues.createComment({
           owner,
           repo,
-          issue_number: data[i].number,
+          issue_number: number,
           body: `Hey ${requestedReviewersLogin} ! ${reviewComment}`,
         });
       }
@@ -41,11 +41,11 @@ const run = async () => {
 };
 
 const rightTimeForReminder = (updatedAt, daysBeforeReminder) => {
-  const today = new Date();
+  const today = new Date().getTime();
   const updatedAtDate = new Date(updatedAt).getTime();
   const daysInMilliSecond = 86400000 * daysBeforeReminder;
-  console.log(updatedAtDate - daysInMilliSecond, today, updatedAtDate - daysInMilliSecond > today);
-  return updatedAtDate - daysInMilliSecond > today;
+  return updatedAtDate - daysInMilliSecond < today; // To trigger the comment
+  // return updatedAtDate - daysInMilliSecond > today;
 };
 
 if (require.main === require.cache[eval('__filename')]) {
