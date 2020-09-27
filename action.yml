@@ -4,6 +4,7 @@ author: 'Baptiste Lombard'
 inputs:
   token:
     description: 'The GITHUB_TOKEN secret'
+    default: "${{ secrets.GITHUB_TOKEN }}"
     required: true
   stale:
     description: 'Remind the author that the PR has not been updated for a while'

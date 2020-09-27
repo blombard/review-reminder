@@ -12,5 +12,3 @@ jobs:
       uses: actions/checkout@v2
     - name: Tests
       run: ./
-      with:
-        token: "${{ secrets.GITHUB_TOKEN }}"
