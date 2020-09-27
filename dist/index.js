@@ -23,11 +23,14 @@ const run = async () => {
 
     console.log(data[0]);
     for (let i = 0; i < data.length; i++) {
+      const { requested_reviewers, assignees } = data[i]
+      // const requestedReviewersLogin = requested_reviewers.map(r => r.login)
+      const requestedReviewersLogin = assignees.map(r => `@${r.login}`).join(', ')
       await octokit.issues.createComment({ 
         owner,
         repo,
         issue_number: data[i].number,
-        body: "Hello, world! Thanks for creating the PR",
+        body: `Hey ${requestedReviewersLogin} ! Don't forget to review this PR !`,
       });
     }
   } catch (error) {
