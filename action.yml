@@ -5,12 +5,14 @@ inputs:
   token:
     description: 'The GITHUB_TOKEN secret'
     required: true
-  stale:
-    description: 'Remind the author that the PR has not been updated for a while'
+  reminder-comment:
+    description: 'Message to the requested reviewers'
+    default: "Don't forget to review this PR !" # Note that "Hey @reviewer1, @reviewer2, @... !" will be appended before.
     required: false
-  review:
-    description: 'Remind requested reviewers to review the PR'
-    required: false
+  days-before-reminder:
+    description: 'The number of days before the requested reviewers will receive a reminder'
+    default: '1'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
