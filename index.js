@@ -3,7 +3,7 @@ const github = require('@actions/github');
 
 const run = async () => {
   try {
-    const token = core.getInput('token');
+    const token = core.getInput('token', { required: true });
     const octokit = github.getOctokit(token);
     // const owner = github.context.payload.repository.full_name.split('/')[0];
     const owner = github.context.payload.sender.login;
@@ -18,10 +18,10 @@ const run = async () => {
     console.log(data[0]);
     // console.log(data[0].labels);
 
-    await octokit.pulls.createComment({ 
+    await octokit.issues.createComment({ 
       owner,
       repo,
-      pull_number: data[0].number,
+      issue_number: data[0].number,
       body: "Hello, world! Thanks for creating the PR",
     });
   } catch (error) {
