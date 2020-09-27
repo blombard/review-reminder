@@ -11,9 +11,10 @@ const run = async () => {
       repo: github.context.payload.repository.name,
     });
 
-    const data = await octokit.pulls.list({
+    const { data } = await octokit.pulls.list({
       owner: github.context.payload.repository.full_name.split('/')[0],
       repo: github.context.payload.repository.name,
+      state: 'open',
     });
 
     console.log(data);
