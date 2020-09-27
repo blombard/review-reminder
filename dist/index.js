@@ -15,7 +15,6 @@ const run = async () => {
     // const owner = github.context.payload.repository.full_name.split('/')[0];
     const owner = github.context.payload.sender.login;
     const repo = github.context.payload.repository.name;
-    const pull_number = context.payload.pull_request.number;
 
     const { data } = await octokit.pulls.list({
       owner,
@@ -29,9 +28,9 @@ const run = async () => {
     await octokit.pulls.createComment({ 
       owner,
       repo,
-      pull_number,
+      pull_number: data[0].number,
       body: "Hello, world! Thanks for creating the PR",
-    })
+    });
   } catch (error) {
     core.setFailed(error.message);
   }
