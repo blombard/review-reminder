@@ -4,13 +4,13 @@ const nock = require('nock');
 const run = require('./index.js');
 
 const inputs = {
-  'token': 'foo',
+  token: 'foo',
   'reminder-comment': "Don't forget to review this PR !",
   'days-before-reminder': '1',
 };
 
 function mockGetInput(requestResponse) {
-  return function (name, options) { // eslint-disable-line no-unused-vars
+  return function (name, options) { // eslint-disable-line
     return requestResponse[name];
   };
 }
@@ -22,10 +22,10 @@ describe('Run the test suite', () => {
 
   nock('https://api.github.com')
     .get(`/repos/${repoOwner}//pulls?state=open`)
-    .reply(200, [{ requested_reviewers: [{ login: 'foo' }], updated_at: '2011-01-26T19:01:12.000Z', number: 1 }])
+    .reply(200, [{ requested_reviewers: [{ login: 'foo' }], updated_at: '2011-01-26T19:01:12.000Z', number: 1 }]);
   nock('https://api.github.com')
     .post(`/repos/${repoOwner}//issues/1/comments`, { body: "Hey @foo ! Don't forget to review this PR !" })
-    .reply(200, {})
+    .reply(200, {});
 
   test('it should be a success when the params are good', async () => {
     core.getInput = jest.fn().mockImplementation(mockGetInput(inputs));
@@ -34,7 +34,7 @@ describe('Run the test suite', () => {
   });
 
   test('it should be a failure when no params are given', async () => {
-    core.getInput.mockReset()
+    core.getInput.mockReset();
     await run();
     expect(core.setFailed).toHaveBeenCalled();
   });

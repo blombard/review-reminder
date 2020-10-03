@@ -1,12 +1,12 @@
 name: 'Review reminder'
-description: 'Send reminders to authors, reviewers... of a pull request'
+description: 'Send reminders to requested reviewers of a pull request'
 author: 'Baptiste Lombard'
 branding:
   icon: 'bell'
   color: 'yellow'
 inputs:
   token:
-    description: 'The GITHUB_TOKEN secret'
+    description: 'Your GITHUB_TOKEN secret'
     required: true
   reminder-comment:
     description: 'Message to the requested reviewers'
