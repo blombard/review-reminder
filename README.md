@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/9ca3572ed6d55c403b49/maintainability)](https://codeclimate.com/github/blombard/review-reminder/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/9ca3572ed6d55c403b49/test_coverage)](https://codeclimate.com/github/blombard/review-reminder/test_coverage)
+
 # Review reminder
 Send reminders to requested reviewers of a pull request
 
