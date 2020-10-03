@@ -28,12 +28,15 @@ jobs:
 
 ## Inputs
 #### token
-`required: true`
+`required: true`\
+Should be your GITHUB_TOKEN secret
 
 #### reminder-comment
-`required: false`
+`required: false`\
+`default: "Don't forget to review this PR !"`\
 Note that `"Hey @reviewer1, @reviewer2, @... !"` will be appended before.
 
 #### days-before-reminder
-`required: false`
+`required: false`\
+`default: '1'`\
 Should be greater or equal to `0`
