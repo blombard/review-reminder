@@ -11,6 +11,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Tests
-      uses: ./
+      run: |
+        npm ci
+        npm t
+    - name: Code Climate Coverage Action
+      uses: paambaati/codeclimate-action@v2.6.0
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
-        token: "${{ secrets.GITHUB_TOKEN }}"
+        coverageCommand: npm run coverage
