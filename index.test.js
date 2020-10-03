@@ -1,8 +1,10 @@
 const core = require('@actions/core');
-// const github = require('@actions/github');
 const nock = require('nock');
 
 const run = require('./index.js');
+
+console.log(process.env.NODE_ENV);
+console.log(process.env);
 
 const inputs = {
   'token': 'foo',
