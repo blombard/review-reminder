@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-// const github = require('@actions/github');
 const nock = require('nock');
 
 const run = require('./index.js');
@@ -19,11 +18,13 @@ function mockGetInput(requestResponse) {
 jest.mock('@actions/core');
 
 describe('Run the test suite', () => {
+  const repoOwner = process.env.GITHUB_REPOSITORY_OWNER || '';
+
   nock('https://api.github.com')
-    .get('/repos/blombard//pulls?state=open')
+    .get(`/repos/${repoOwner}//pulls?state=open`)
     .reply(200, [{ requested_reviewers: [{ login: 'foo' }], updated_at: '2011-01-26T19:01:12.000Z', number: 1 }])
   nock('https://api.github.com')
-    .post('/repos/blombard//issues/1/comments', { body: "Hey @foo ! Don't forget to review this PR !" })
+    .post(`/repos/${repoOwner}//issues/1/comments`, { body: "Hey @foo ! Don't forget to review this PR !" })
     .reply(200, {})
 
   test('it should be a success when the params are good', async () => {
