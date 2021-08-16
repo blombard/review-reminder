@@ -9,7 +9,7 @@ const run = async () => {
 
     const octokit = github.getOctokit(token);
     const owner = github.context.payload.sender && github.context.payload.sender.login;
-    const repo = github.context.payload.repositor && github.context.payload.repository.name;
+    const repo = github.context.payload.repository && github.context.payload.repository.name;
     const { data } = await octokit.pulls.list({ owner, repo, state: 'open' });
 
     data.forEach(({ requested_reviewers, updated_at, number }) => {
