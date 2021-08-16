@@ -19,10 +19,10 @@ jest.mock('@actions/core');
 
 describe('Run the test suite', () => {
   nock('https://api.github.com')
-    .get(/\/repos\/.*\/\/pulls\?state=open/)
+    .get(/\/repos\/.*\/pulls\?state=open/)
     .reply(200, [{ requested_reviewers: [{ login: 'foo' }], updated_at: '2011-01-26T19:01:12.000Z', number: 1 }]);
   nock('https://api.github.com')
-    .post(/\/repos\/.*\/\/issues\/1\/comments/, { body: "Hey @foo ! Don't forget to review this PR !" })
+    .post(/\/repos\/.*\/issues\/1\/comments/, { body: "Hey @foo ! Don't forget to review this PR !" })
     .reply(200, {});
 
   test('it should be a success when the params are good', async () => {
