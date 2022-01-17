@@ -9,6 +9,9 @@ const inputs = {
   'days-before-reminder': '1',
 };
 
+process.env['GITHUB_REPOSITORY_OWNER'] = 'blombard';
+process.env['GITHUB_REPOSITORY'] = 'blombard/review-reminder';
+
 function mockGetInput(requestResponse) {
   return function (name, options) { // eslint-disable-line
     return requestResponse[name];
