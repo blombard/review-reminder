@@ -15,12 +15,11 @@ const run = async () => {
     const daysBeforeReminder = core.getInput('days-before-reminder');
 
     const octokit = github.getOctokit(token);
-    const owner = github.context.payload.sender && github.context.payload.sender.login;
-    const repo = github.context.payload.repository && github.context.payload.repository.name;
-    const { data } = await octokit.pulls.list({ owner, repo, state: 'open' });
+    const { GITHUB_REPOSITORY_OWNER: owner, GITHUB_REPOSITORY: repo } = process.env;
+    const { data } = await octokit.pulls.list({ owner, repo: repo.split('/')[1], state: 'open' });
 
     data.forEach(({ requested_reviewers, updated_at, number }) => {
-      if (rightTimeForReminder(updated_at, daysBeforeReminder)) {
+      if (requested_reviewers.length && rightTimeForReminder(updated_at, daysBeforeReminder)) {
         const requestedReviewersLogin = requested_reviewers.map(r => `@${r.login}`).join(', ');
         octokit.issues.createComment({
           owner,
