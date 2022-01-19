@@ -8,7 +8,7 @@ Send reminders to requested reviewers of a pull request
 ```yml
 on:
   schedule:
-    - cron: '*/9 * * * *'
+    - cron: '0 9 * * *'
 
 jobs:
   deploy:
