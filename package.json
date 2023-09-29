@@ -1,6 +1,6 @@
 {
   "name": "review-reminder",
-  "version": "0.1.0",
+  "version": "0.6.0",
   "description": "Send reminders to requested reviewers of a pull request",
   "main": "dist/index.js",
   "scripts": {

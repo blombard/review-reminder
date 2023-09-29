@@ -25,7 +25,7 @@ describe('Run the test suite', () => {
     .get(/\/repos\/.*\/pulls\?state=open/)
     .reply(200, [{ requested_reviewers: [{ login: 'foo' }],requested_teams: [{ slug: 'bar' }], updated_at: '2011-01-26T19:01:12.000Z', number: 2 }]);
   nock('https://api.github.com')
-    .post(/\/repos\/.*\/issues\/1\/comments/, { body: "Hey @foo, @bar ! Don't forget to review this PR !" })
+    .post(/\/repos\/.*\/issues\/2\/comments/, { body: "Hey @foo, @bar ! Don't forget to review this PR !" })
     .reply(200, {});
 
   test('it should be a success when the params are good', async () => {
