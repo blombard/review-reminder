@@ -12,14 +12,16 @@ const run = async () => {
     const repo = GITHUB_REPOSITORY.split('/')[1];
     const { data } = await octokit.pulls.list({ owner, repo, state: 'open' });
 
-    data.forEach(({ requested_reviewers, updated_at, number }) => {
-      if (requested_reviewers.length && rightTimeForReminder(updated_at, daysBeforeReminder)) {
-        const requestedReviewersLogin = requested_reviewers.map(r => `@${r.login}`).join(', ');
+    data.forEach(({ requested_reviewers, requested_teams, updated_at, number }) => {
+      if ((requested_reviewers.length || requested_teams.length) && rightTimeForReminder(updated_at, daysBeforeReminder)) {
+        const requestedReviewersLogin = requested_reviewers.map(r => `@${r.login}`);
+        const requestedTeamsSlug = requested_teams.map(r => `@${r.slug}`);
+        const allReviewers = [...requestedReviewersLogin, ...requestedTeamsSlug].join(', ');
         octokit.issues.createComment({
           owner,
           repo,
           issue_number: number,
-          body: `Hey ${requestedReviewersLogin} ! ${reviewComment}`,
+          body: `Hey ${allReviewers} ! ${reviewComment}`,
         });
       }
     });
