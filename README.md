@@ -40,3 +40,7 @@ Note that `"Hey @reviewer1, @reviewer2, @... !"` will be appended before.
 `required: false`\
 `default: '1'`\
 Should be greater or equal to `0`
+
+#### organization
+`required: false`\
+Default organization for sending review request

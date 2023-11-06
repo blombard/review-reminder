@@ -16,6 +16,9 @@ inputs:
     description: 'The number of days before the requested reviewers will receive a reminder'
     default: '1'
     required: true
+  organization:
+    description: 'Default organization for sending review request'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
