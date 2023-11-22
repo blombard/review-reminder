@@ -1,6 +1,6 @@
 {
   "name": "review-reminder",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Send reminders to requested reviewers of a pull request",
   "main": "dist/index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "@actions/github": "^4.0.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.24.0",
+    "@vercel/ncc": "^0.38.1",
     "jest": "^26.4.2",
     "nock": "^13.0.4"
   }
